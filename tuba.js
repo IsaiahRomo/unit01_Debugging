@@ -11,9 +11,9 @@
  */
 
 /* global variables tracking status of each form section */
-var acresComplete = true;
-var cropsComplete = true;
-var monthsComplete = true;
+var acresComplete = false;
+var cropsComplete = false;
+var monthsComplete = false;
 var fuelComplete = true;
 
 /* global variables referencing sidebar h2 and p elements */
@@ -33,29 +33,46 @@ var acresBox = document.forms[0].acres;
 /* verify acres text box entry is a positive number */
 function verifyAcres() {
    testFormCompleteness();      
-}
+};
 
 /* verify at least one crops checkbox is checked */
 function verifyCrops() {
-   testFormCompleteness();
-}
+   try{
+      for(var i = 0; i < 7; i++){
+         if(cropsFieldset.getElementsByTagName("input")[i].checked){
+            cropsComplete = true;
+            messageElement.innerHTML = "";
+            testFormCompleteness();
+            i=8;
+         }
+      }
+      if(i == 7){
+         throw "Please select at least one crop.";
+      }
+   }
+   catch(message){
+      cropsComplete = false;
+      messageHeadElement.innerHTML = "";
+      messageElement.innerHTML = message;
+   }
+};
 
 /* verify months text box entry is between 1 and 12 */
 function verifyMonths() {
    testFormCompleteness();
-}
+};
 
 /* verify that a fuel option button is selected */
 function verifyFuel() {
    testFormCompleteness();
-}
+};
 
 /* check if all four form sections are completed */
 function testFormCompleteness() {
    if (acresComplete && cropsComplete && monthsComplete && fuelComplete) {
       createRecommendation();
    }
-}
+};
 
 /* generate tractor recommendation based on user selections */
 function createRecommendation() {
@@ -90,7 +107,7 @@ function createRecommendation() {
    } else {
       messageHeadElement.innerHTML += "D";  
    }
-}
+};
 
 /* create event listeners for all input elements */
 function createEventListeners() {
@@ -130,11 +147,11 @@ function createEventListeners() {
         fuelBox.attachEvent("onclick", verifyFuel);
       }
    }
-}
+};
 
 /* create event listeners when page finishes loading */
 if (window.addEventListener) {
    window.addEventListener("load", createEventListeners, false);
 } else if (window.attachEvent) {
    window.attachEvent("onload", createEventListeners);
-}
+};
