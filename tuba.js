@@ -11,9 +11,9 @@
  */
 
 /* global variables tracking status of each form section */
-var acresComplete = false;
-var cropsComplete = false;
-var monthsComplete = false;
+var acresComplete = true;
+var cropsComplete = true;
+var monthsComplete = true;
 var fuelComplete = true;
 
 /* global variables referencing sidebar h2 and p elements */
@@ -91,7 +91,7 @@ function createRecommendation() {
          messageHeadElement.innerHTML = "W1205";
          messageElement.innerHTML = "Can't be beat for the general tasks of a large farm. Medium- to heavy-duty muscle that's there then you need it.";
       } else { // 10+ months of farming per year
-         if (document.getElementById("wheat").checked || document.getElementById("corn").checked && document.getElementById("soy").checked) {
+         if (document.getElementById("wheat").checked || document.getElementById("corn").checked || document.getElementById("soy").checked) {
             messageHeadElement.innerHTML = "W2500";
             messageElement.innerHTML = "Our heavy-duty tractor designed especially for the needs of wheat, corn, and soy farmers. A reliable piece of equipment that you can turn to all year long.";
          } else {
@@ -103,7 +103,7 @@ function createRecommendation() {
    if (document.getElementById("E85").checked) { // add suffix to model name based on fuel choice
       messageHeadElement.innerHTML += "E";
    } else if (document.getElementById("biodiesel").checked) {
-      messageHeadElement.innerHTML = "B";
+      messageHeadElement.innerHTML += "B";
    } else {
       messageHeadElement.innerHTML += "D";  
    }
